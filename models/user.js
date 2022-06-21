@@ -1,8 +1,8 @@
-const mongoose = rquire("mongoose");
-const crypto = rquire("crypto");
-const uuid = require("uuid/v1");
+const mongoose = require("mongoose");
+const crypto = require("crypto");
+const { v1: uuid } = require("uuid");
 
-const userschema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -65,3 +65,4 @@ userSchema.methods = {
     }
   },
 };
+module.exports = mongoose.model("User", userSchema);
