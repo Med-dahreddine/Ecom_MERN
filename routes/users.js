@@ -1,17 +1,10 @@
 const express = require("express");
-const {
-  hello,
-  signup,
-  signin,
-  signout,
-} = require("../controllers/userController");
-const { userSignUpValidator } = require("../middelewares/userValidator");
+const { getOneUser } = require("../controllers/userController");
+const { userById } = require("../middelewares/user");
+
 const router = express.Router();
 
-router.get("/", hello);
+router.get("/profile/:userId", getOneUser);
 
-router.post("/signup", userSignUpValidator, signup);
-router.get("/signin", signin);
-router.get("/signout", signout);
-
+router.param("userId", userById);
 module.exports = router;
