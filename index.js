@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 
 //Import Routes
@@ -12,12 +13,13 @@ require("dotenv").config();
 console.log(process.env.DATABASE);
 
 mongoose
-  .connect("mongodb://localhost:27017")
+  .connect("mongodb://localhost:27017/ecommerce")
   .then(() => console.log("db connectd"))
   .catch(() => console.error("not connect to the database"));
 
 // Middlewares
 app.use(express.json());
+app.use(cookieParser());
 app.use(expressValidator());
 
 //Routes
