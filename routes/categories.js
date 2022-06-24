@@ -4,9 +4,20 @@ const { userById } = require("../middelewares/user");
 
 const router = express.Router();
 
-const { createCategory } = require("../controllers/categoryController");
+const {
+  allCategories,
+  createCategory,
+  categoryId,
+  showCategory,
+  updateCategory,
+  deleteCategory,
+} = require("../controllers/categoryController");
 
 const { requireSignIn, isAuth, isAdmin } = require("../middelewares/auth");
+
+router.get("/", allCategories);
+
+router.get("/:categoryId", showCategory);
 
 router.post(
   "/create/:userId",
@@ -14,5 +25,18 @@ router.post(
   createCategory
 );
 
+router.put(
+  "/:categoryId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  updateCategory
+);
+router.delete(
+  "/:categoryId/:userId",
+  [requireSignIn, isAuth, isAdmin],
+  deleteCategory
+);
+
 router.param("userId", userById);
+
+router.param("categoryId", categoryId);
 module.exports = router;
