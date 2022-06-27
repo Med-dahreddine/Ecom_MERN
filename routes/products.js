@@ -5,6 +5,8 @@ const { userById } = require("../middelewares/user");
 const router = express.Router();
 
 const {
+  relatedProduct,
+  allProducts,
   createProduct,
   showProduct,
   productById,
@@ -13,6 +15,9 @@ const {
 } = require("../controllers/productController");
 
 const { requireSignIn, isAuth, isAdmin } = require("../middelewares/auth");
+
+router.get("/", allProducts);
+router.get("related/:productId", relatedProduct);
 
 router.get("/:productId", showProduct);
 
